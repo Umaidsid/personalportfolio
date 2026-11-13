@@ -1,0 +1,1154 @@
+/* ------------------------------------------------------------------
+   Tokens
+   Ultramarine ink on cool paper, like a carbon copy. Pink is reserved
+   for defect slips; green and red only ever mean fixed and open.
+------------------------------------------------------------------- */
+:root {
+  --ink: #1c2bd9;
+  --ink-deep: #0d1566;
+  --paper: #f4f5fa;
+  --white: #ffffff;
+  --slip: #f8c9d3;
+  --slip-rule: rgba(13, 21, 102, 0.28);
+  --open: #b5160f;
+  --pass: #06603f;
+  --hint: #f4e04d;
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --narrow: 62%;
+
+  --wrap: 1240px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --bar-h: 60px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar-h) + 16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-deep);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+dl,
+dd {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--hint);
+  color: var(--ink-deep);
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink-deep);
+  outline-offset: 3px;
+}
+
+.bar :focus-visible,
+.hero-copy :focus-visible,
+.contact :focus-visible {
+  outline-color: var(--white);
+}
+
+.wrap {
+  width: min(100%, var(--wrap));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ------------------------------------------------------------------
+   Top bar
+------------------------------------------------------------------- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: var(--bar-h);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bar-nav {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+  font-size: 0.9375rem;
+}
+
+.bar-nav a {
+  text-decoration: none;
+  padding-block: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.bar-nav a:hover {
+  border-bottom-color: currentColor;
+}
+
+.build {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--slip);
+  color: var(--ink-deep);
+  border-radius: 3px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.build-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--open);
+}
+
+.build.is-ready .build-dot {
+  background: var(--pass);
+}
+
+/* ------------------------------------------------------------------
+   Buttons
+------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em 1.3em;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-light {
+  background: var(--white);
+  color: var(--ink);
+}
+
+.btn-light:hover {
+  background: var(--hint);
+  color: var(--ink-deep);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--white);
+}
+
+.btn-ghost:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--ink);
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.btn-ink:hover {
+  background: var(--ink-deep);
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ------------------------------------------------------------------
+   Stamps
+------------------------------------------------------------------- */
+.stamp {
+  display: inline-block;
+  padding: 0.42em 0.65em 0.36em;
+  border: 3px solid currentColor;
+  border-radius: 5px;
+  outline: 1.5px solid currentColor;
+  outline-offset: 3px;
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+  color: var(--open);
+}
+
+.stamp.is-pass {
+  color: var(--pass);
+}
+
+/* ------------------------------------------------------------------
+   Hero
+------------------------------------------------------------------- */
+.hero {
+  background: var(--ink);
+  color: var(--white);
+  min-height: calc(100svh - var(--bar-h));
+  display: flex;
+  align-items: center;
+  padding-block: clamp(32px, 5vh, 72px) clamp(40px, 7vh, 88px);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+
+.hero-title {
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(3.4rem, min(9vw, 11vh), 8rem);
+  line-height: 0.88;
+  letter-spacing: -0.005em;
+}
+
+.hero-title .line {
+  display: block;
+}
+
+.hero-lede {
+  max-width: 34em;
+  margin-top: clamp(24px, 4vh, 40px);
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-slip {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 430px);
+  transform: rotate(2.2deg);
+}
+
+/* ------------------------------------------------------------------
+   Slip: the defect log, reused in the hero and at sign-off
+------------------------------------------------------------------- */
+.slip {
+  position: relative;
+  background: var(--slip);
+  color: var(--ink-deep);
+  padding: 26px 26px 22px;
+  border-radius: 2px;
+  box-shadow: 10px 12px 0 rgba(13, 21, 102, 0.35);
+}
+
+.slip-flat {
+  box-shadow: none;
+}
+
+.slip-head {
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink-deep);
+}
+
+.slip-title {
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.slip-count {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.stamp-hero {
+  position: absolute;
+  top: 18px;
+  right: 14px;
+  z-index: 2;
+}
+
+.log > li {
+  border-bottom: 1px dashed var(--slip-rule);
+}
+
+.log-row {
+  display: grid;
+  grid-template-columns: 2.6em minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: baseline;
+  width: 100%;
+  padding: 13px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+button.log-row {
+  cursor: pointer;
+}
+
+button.log-row:hover .log-what {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.log-id {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.log-status {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.log-status.is-open {
+  color: var(--open);
+}
+
+.log-status.is-fixed {
+  color: var(--pass);
+}
+
+.slip-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding-top: 16px;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------
+   Paper sections
+------------------------------------------------------------------- */
+.sec {
+  padding-block: clamp(64px, 9vw, 128px);
+  overflow-x: clip; /* the release stamp scales up briefly as it lands */
+}
+
+.sec + .sec {
+  border-top: 2px solid var(--ink);
+}
+
+.sec-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+.sec-title {
+  position: sticky;
+  top: calc(var(--bar-h) + 28px);
+  color: var(--ink);
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(3rem, 6.4vw, 5.5rem);
+  line-height: 0.9;
+}
+
+.sec-body > * + * {
+  margin-top: 1.25em;
+}
+
+.sec-body p {
+  max-width: 38em;
+}
+
+.lead {
+  font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+  line-height: 1.34;
+  max-width: 28em !important;
+}
+
+.sub {
+  margin-top: 56px !important;
+  padding-top: 18px;
+  border-top: 2px solid var(--ink);
+  color: var(--ink);
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* About: the 500-hour story */
+.story {
+  margin-top: 56px !important;
+  padding: clamp(28px, 4vw, 48px);
+  background: var(--ink);
+  color: var(--white);
+}
+
+.story-title {
+  max-width: 11em;
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  line-height: 0.92;
+}
+
+.story p {
+  margin-top: 20px;
+  max-width: 36em;
+}
+
+/* Experience */
+.role + .role {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--slip-rule);
+}
+
+.role-dates {
+  color: var(--ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.role-title {
+  margin-top: 4px;
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1;
+}
+
+.role-sum {
+  margin-top: 12px;
+  font-size: 1.1875rem;
+}
+
+.role-list {
+  margin-top: 22px;
+  max-width: 40em;
+}
+
+.role-list li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.role-list li + li {
+  margin-top: 0.6em;
+}
+
+.role-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.8em;
+  height: 2px;
+  background: var(--ink);
+}
+
+/* Coverage: the chain of journeys */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 40px !important;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 168px;
+  margin: 0 0 0 -2px;
+  padding: 16px 14px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--white);
+  color: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.stage:first-child {
+  margin-left: 0;
+}
+
+.stage-name {
+  color: var(--ink);
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  line-height: 1;
+}
+
+.stage-desc {
+  font-size: 0.9375rem;
+  line-height: 1.38;
+}
+
+.stage.is-flipped {
+  transform: rotate(180deg);
+}
+
+.through {
+  margin-top: 0 !important;
+  max-width: none !important;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.plain-cols {
+  columns: 2;
+  column-gap: 40px;
+  margin-top: 20px !important;
+}
+
+.plain-cols li {
+  break-inside: avoid;
+  padding-block: 9px;
+  border-bottom: 1px solid var(--slip-rule);
+}
+
+/* Toolkit */
+.kit {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+.kit th,
+.kit td {
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--slip-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.kit thead th {
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.kit tbody th {
+  width: 11em;
+  font-weight: 700;
+}
+
+.kit .num {
+  width: 4em;
+  padding-right: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.kit tfoot th,
+.kit tfoot td {
+  border-top: 2px solid var(--ink);
+  border-bottom: 0;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.edu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 40px;
+  margin-top: 20px !important;
+}
+
+.edu dt {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Sign-off */
+.signoff {
+  position: relative;
+  max-width: 560px;
+}
+
+.stamp-release {
+  position: absolute;
+  right: -112px;
+  top: -24px;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  border-width: 4px;
+  outline-width: 2px;
+  outline-offset: 4px;
+  color: var(--pass);
+  transform: rotate(-10deg);
+}
+
+/* ------------------------------------------------------------------
+   Planted defects
+------------------------------------------------------------------- */
+.defect-inline {
+  all: unset;
+  cursor: text;
+}
+
+.defect-inline:focus-visible {
+  outline: 3px solid var(--ink-deep);
+  outline-offset: 3px;
+}
+
+.fixed {
+  background: linear-gradient(transparent 58%, rgba(6, 96, 63, 0.26) 0);
+}
+
+.stage.fixed {
+  background: var(--white);
+  box-shadow: inset 0 -8px 0 rgba(6, 96, 63, 0.26);
+}
+
+.hinted {
+  background: var(--hint) !important;
+  box-shadow: 0 0 0 6px var(--hint);
+}
+
+[data-fixed]:focus {
+  outline: none;
+}
+
+/* ------------------------------------------------------------------
+   Dock: progress once the hero slip is out of view
+------------------------------------------------------------------- */
+.dock {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 30;
+  display: flex;
+  align-items: stretch;
+  background: var(--slip);
+  color: var(--ink-deep);
+  border: 2px solid var(--ink-deep);
+  border-radius: 3px;
+  box-shadow: 5px 6px 0 rgba(13, 21, 102, 0.3);
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.dock[hidden] {
+  display: none;
+}
+
+.dock-count {
+  padding: 10px 14px;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.dock-hint {
+  padding: 10px 14px;
+  border: 0;
+  border-left: 2px solid var(--ink-deep);
+  background: none;
+  cursor: pointer;
+}
+
+.dock-count:hover,
+.dock-hint:hover {
+  background: var(--white);
+}
+
+.dock-hint[hidden] {
+  display: none;
+}
+
+/* ------------------------------------------------------------------
+   Ticket dialog
+------------------------------------------------------------------- */
+.ticket {
+  width: min(580px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-deep);
+  overflow: visible;
+}
+
+.ticket::backdrop {
+  background: rgba(13, 21, 102, 0.6);
+}
+
+.ticket-slip {
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: clamp(22px, 4vw, 34px);
+  background: var(--slip);
+  border-radius: 2px;
+  box-shadow: 10px 12px 0 rgba(13, 21, 102, 0.5);
+}
+
+.ticket-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+}
+
+.ticket-id {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stamp-ticket {
+  margin: 4px 6px 0 0;
+}
+
+.ticket-title {
+  margin-top: 6px;
+  max-width: 13em;
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(2rem, 5.6vw, 2.75rem);
+  line-height: 0.98;
+}
+
+.ticket-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+  padding-block: 14px;
+  border-block: 2px solid var(--ink-deep);
+}
+
+.ticket dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.ticket dd {
+  font-weight: 700;
+}
+
+.ticket-sub {
+  margin-top: 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.ticket-steps {
+  margin-top: 6px;
+  padding-left: 1.3em;
+  list-style: decimal;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.ticket-steps li + li {
+  margin-top: 4px;
+}
+
+.ticket-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--slip-rule);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.ticket-compare div:last-child dd {
+  color: var(--open);
+}
+
+.ticket-foot {
+  margin-top: 26px;
+}
+
+/* ------------------------------------------------------------------
+   Contact
+------------------------------------------------------------------- */
+.contact {
+  background: var(--ink);
+  color: var(--white);
+  padding-block: clamp(72px, 11vw, 150px) clamp(56px, 8vw, 96px);
+}
+
+.contact-title {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 500;
+}
+
+.contact-mail {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 10px;
+  font-stretch: var(--narrow);
+  font-weight: 800;
+  font-size: clamp(2.3rem, 10.6vw, 9rem);
+  line-height: 0.95;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-mail:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.08em;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.contact-meta {
+  margin-top: 40px;
+  font-size: 1rem;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 60;
+  padding: 10px 16px;
+  background: var(--white);
+  color: var(--ink-deep);
+  border: 2px solid var(--ink-deep);
+  border-radius: 3px;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ------------------------------------------------------------------
+   Motion: one load sequence, plus motion that answers an action
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title .line {
+    animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .hero-title .line:nth-child(2) { animation-delay: 0.07s; }
+  .hero-title .line:nth-child(3) { animation-delay: 0.14s; }
+  .hero-title .line:nth-child(4) { animation-delay: 0.21s; }
+  .hero-title .line:nth-child(5) { animation-delay: 0.28s; }
+
+  .hero-lede,
+  .hero-actions {
+    animation: rise 0.7s 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .hero-slip {
+    animation: drop 0.8s 0.5s cubic-bezier(0.2, 0.9, 0.25, 1.15) both;
+  }
+
+  .ticket[open] .ticket-slip {
+    animation: drop-ticket 0.35s cubic-bezier(0.2, 0.9, 0.25, 1.1) both;
+  }
+
+  .ticket[open] .stamp-ticket,
+  .stamp.is-struck {
+    animation: strike 0.38s 0.22s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  .stage.was-flipped {
+    animation: unflip 0.7s cubic-bezier(0.3, 1.3, 0.5, 1) both;
+  }
+
+  .fixed.is-fresh {
+    animation: mark 1.2s ease-out;
+  }
+
+  .stage.was-flipped.is-fresh {
+    animation: unflip 0.7s cubic-bezier(0.3, 1.3, 0.5, 1) both, mark 1.4s ease-out;
+  }
+
+  .hinted {
+    animation: nudge 0.5s ease-in-out 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-48px) rotate(-7deg);
+  }
+}
+
+@keyframes drop-ticket {
+  from {
+    opacity: 0;
+    transform: translateY(-24px) rotate(-3deg);
+  }
+}
+
+@keyframes strike {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(1.9);
+  }
+}
+
+@keyframes unflip {
+  from {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes mark {
+  from {
+    background-color: rgba(6, 96, 63, 0.35);
+  }
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.stage.is-flipped.hinted {
+  animation: none;
+}
+
+/* ------------------------------------------------------------------
+   Smaller screens
+------------------------------------------------------------------- */
+/* No room beside the slip: the stamp drops below it instead of covering it. */
+@media (max-width: 1180px) {
+  .stamp-release {
+    position: static;
+    margin: 28px 0 8px 12px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .bar-nav {
+    display: none;
+  }
+
+  .build {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    font-size: 1.0625rem;
+  }
+
+  .hero {
+    min-height: 0;
+  }
+
+  .hero-grid,
+  .sec-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-title {
+    font-size: clamp(3.2rem, 15.5vw, 6.5rem);
+  }
+
+  .hero-slip {
+    justify-self: start;
+    margin-top: 16px;
+    transform: rotate(1.2deg);
+  }
+
+  .sec-title {
+    position: static;
+  }
+
+  .stages {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stage {
+    min-height: 0;
+    margin: -2px 0 0;
+  }
+
+  .stage:first-child {
+    margin-top: 0;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .bar-inner {
+    gap: 12px;
+  }
+
+  .brand {
+    font-size: 0.875rem;
+  }
+
+  .build {
+    padding: 5px 9px;
+    font-size: 0.8125rem;
+  }
+
+  .plain-cols {
+    columns: 1;
+  }
+
+  .edu,
+  .ticket-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kit {
+    font-size: 0.9375rem;
+  }
+
+  .kit tbody th {
+    width: 6.5em;
+  }
+
+  .kit th,
+  .kit td {
+    padding-right: 10px;
+  }
+
+  .slip {
+    padding: 22px 18px 18px;
+  }
+
+  .slip-title {
+    font-size: 1.875rem;
+  }
+
+  .stamp-hero {
+    font-size: 0.9375rem;
+    right: 10px;
+  }
+
+  .dock {
+    right: 12px;
+    bottom: 12px;
+  }
+}
